@@ -19,6 +19,9 @@ public class Panel extends JPanel implements ActionListener {
 
         Graphics2D g = (Graphics2D) graphics;
 
+        gameLogic.update();
+
+        drawField(g);
         drawBall(g);
     }
 
@@ -27,6 +30,14 @@ public class Panel extends JPanel implements ActionListener {
         Point ballPos = gameLogic.getBallPos();
         int r = gameLogic.getBallRadius();
         g.fillOval(ballPos.x, ballPos.y, r, r);
+    }
+
+    private void drawField(Graphics2D g) {
+        g.setColor(Color.GREEN);
+        Rectangle panelSize = g.getClip().getBounds();
+        Rectangle grass = gameLogic.getGrassRect();
+        System.out.println(grass.height);
+        g.fillRect(0, panelSize.height - grass.height, panelSize.width, grass.height);
     }
 
     @Override

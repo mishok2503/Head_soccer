@@ -4,6 +4,8 @@ public class Ball {
 
     private Point pos;
     private final int radius;
+    private double speedX = 0;
+    private double speedY = 0;
 
     public Ball(Field field, int radius) {
         pos = field.getBallStartPos();
@@ -18,8 +20,10 @@ public class Ball {
         return pos;
     }
 
-    public void move() {
-
+    public void move(double g) {
+        speedY += g;
+        pos.y += speedY;
+        pos.x += speedX;
     }
 
 }
