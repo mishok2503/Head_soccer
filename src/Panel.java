@@ -4,7 +4,10 @@ import java.awt.event.*;
 
 public class Panel extends JPanel implements ActionListener {
 
-    public Panel(int fps) {
+    private final GameLogic gameLogic;
+
+    public Panel(GameLogic gameLogic, int fps) {
+        this.gameLogic = gameLogic;
         Timer timer = new Timer(1000 / fps, this);
         timer.start();
     }
@@ -20,6 +23,6 @@ public class Panel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        repaint();
     }
 }
