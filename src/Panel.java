@@ -4,10 +4,8 @@ import java.awt.event.*;
 
 public class Panel extends JPanel implements ActionListener {
 
-    private static final int timerDelay = 16;
-
-    public Panel() {
-        Timer timer = new Timer(timerDelay, this);
+    public Panel(int fps) {
+        Timer timer = new Timer(1000 / fps, this);
         timer.start();
     }
 
