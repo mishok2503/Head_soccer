@@ -28,6 +28,7 @@ public class GameLogic {
     }
 
     public void update() {
+        ball.CollisionProcessing(getGrassRect());
         ball.move(g);
     }
 

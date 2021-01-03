@@ -36,7 +36,6 @@ public class Panel extends JPanel implements ActionListener {
         g.setColor(Color.GREEN);
         Rectangle panelSize = g.getClip().getBounds();
         Rectangle grass = gameLogic.getGrassRect();
-        System.out.println(grass.height);
         g.fillRect(0, panelSize.height - grass.height, panelSize.width, grass.height);
     }
 
