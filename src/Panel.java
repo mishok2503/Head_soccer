@@ -18,7 +18,15 @@ public class Panel extends JPanel implements ActionListener {
         this.setBackground(Color.BLACK);
 
         Graphics2D g = (Graphics2D) graphics;
-        Rectangle panelSize = g.getClip().getBounds();
+
+        drawBall(g);
+    }
+
+    private void drawBall(Graphics2D g) {
+        g.setColor(Color.CYAN);
+        Point ballPos = gameLogic.getBallPos();
+        int r = gameLogic.getBallRadius();
+        g.fillOval(ballPos.x, ballPos.y, r, r);
     }
 
     @Override
