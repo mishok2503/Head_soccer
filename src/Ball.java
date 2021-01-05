@@ -2,14 +2,14 @@ import java.awt.*;
 
 public class Ball {
 
-    private Point pos;
+    private Point pos, prevPos;
     private final int radius;
     private final double loss = 0.3;
-    private double speedX = 1;
+    private double speedX = 2;
     private double speedY = 0;
 
     public Ball(Field field, int radius) {
-        pos = field.getBallStartPos();
+        prevPos = pos = field.getBallStartPos();
         this.radius = radius;
     }
 
@@ -22,6 +22,7 @@ public class Ball {
     }
 
     public void move(double g) {
+        prevPos = new Point(pos);
         speedY += g;
         pos.y += speedY;
         pos.x += speedX;
@@ -29,10 +30,5 @@ public class Ball {
 
     public void CollisionProcessing(Rectangle rect) {
         //TODO
-        Rectangle tmp = new Rectangle(pos.x, pos.y, radius, radius);
-        if (tmp.intersects(rect)) {
-            speedY *= -(1 - loss);
-        }
     }
-
 }
