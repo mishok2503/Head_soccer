@@ -34,9 +34,8 @@ public class Panel extends JPanel implements ActionListener {
 
     private void drawField(Graphics2D g) {
         g.setColor(Color.GREEN);
-        Rectangle panelSize = g.getClip().getBounds();
-        Rectangle grass = gameLogic.getGrassRect();
-        g.fillRect(0, panelSize.height - grass.height, panelSize.width, grass.height);
+        for (Rectangle rect : gameLogic.getAllColliders())
+            g.fillRect(rect.x, rect.y, rect.width, rect.height);
     }
 
     @Override

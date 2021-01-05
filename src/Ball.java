@@ -5,7 +5,7 @@ public class Ball {
     private Point pos;
     private final int radius;
     private final double loss = 0.3;
-    private double speedX = 0;
+    private double speedX = 1;
     private double speedY = 0;
 
     public Ball(Field field, int radius) {
