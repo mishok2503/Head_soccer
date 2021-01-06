@@ -28,8 +28,9 @@ public class Panel extends JPanel implements ActionListener {
     private void drawBall(Graphics2D g) {
         g.setColor(Color.CYAN);
         Point ballPos = gameLogic.getBallPos();
-        int r = gameLogic.getBallRadius() + (int) Physics.Eps;
-        g.fillOval(ballPos.x, ballPos.y, r, r);
+        int delta = (int) Physics.Eps;
+        int r = gameLogic.getBallRadius() + 2 * delta;
+        g.fillOval(ballPos.x - delta, ballPos.y - delta, r, r);
     }
 
     private void drawField(Graphics2D g) {
