@@ -23,6 +23,22 @@ public class Vector {
         return Math.sqrt(x * x + y * y);
     }
 
+    public void setAngle(double a) {
+        double L = abs();
+        x = L * Math.cos(a);
+        y = L * Math.sin(a);
+    }
+
+    public void add(Vector v) {
+        x += v.x;
+        y += v.y;
+    }
+
+    public void mul(double k) {
+        x *= k;
+        y *= k;
+    }
+
     public double getAngle() {
         return Math.atan(y / x) + (x < 0 ? Math.PI : 0);
     }

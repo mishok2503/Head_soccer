@@ -5,8 +5,7 @@ public class Ball {
     private Vector pos, prevPos;
     private final int radius;
     private final double loss = 0.2;
-    private double speedX = 1;
-    private double speedY = 0;
+    private Vector speed = new Vector(0, 0);
 
     public Ball(Field field, int radius) {
         prevPos = pos = new Vector(field.getBallStartPos());
@@ -23,9 +22,8 @@ public class Ball {
 
     public void move(double g) {
         prevPos = new Vector(pos);
-        speedY += g;
-        pos.y += speedY;
-        pos.x += speedX;
+        speed.y += g;
+        pos.add(speed);
     }
 
     public void CollisionProcessing(Rectangle rect) {
@@ -34,8 +32,8 @@ public class Ball {
             double beta = n.getAngle();
             pos = new Vector(prevPos);
 
-            speedX *= (1 - loss);//TODO
-            speedY *= -(1 - loss);
+            speed.y *= -1;
+            speed.mul(1 - loss);
         }
     }
 }
