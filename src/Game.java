@@ -4,7 +4,7 @@ public class Game {
     private final Ball ball = new Ball(field, 50);
     private final Player[] players = {new Player(field), new Player(field)};
 
-    private final GameLogic gameLogic = new GameLogic(ball, players, field, 0.1);
+    private final GameLogic gameLogic = new GameLogic(ball, players, field, 0.2);
 
     public void run() {
         Frame frame = new Frame(gameLogic, 1200, 1000, 60);
