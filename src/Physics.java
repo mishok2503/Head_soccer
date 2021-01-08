@@ -7,8 +7,22 @@ public class Physics {
         return a <= b + eps && a >= b - eps;
     }
 
-    public static double distantion(Point a, Point b) {
+    public static double distance(Point a, Point b) {
         return Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+    }
+
+    public static Vector CheckCollision(Point pos, int r, Point pos1, int r1) {
+        pos1 = new Point(550, 850);
+        r1 = 50;//TODO
+
+        r /= 2;
+        pos.x += r;
+        pos.y += r;
+        if (is_equal(distance(pos, pos1), r + r1)) {
+            return new Vector(pos.x - pos1.x, pos.y - pos1.y);
+        }
+
+        return new Vector(0, 0);
     }
 
     public static Vector CheckCollision(Point pos, int r, Rectangle rect) {
@@ -30,7 +44,7 @@ public class Physics {
         pos.x += r;
         pos.y += r;
         for (Point point : points) {
-            if (is_equal(distantion(pos, point), r)) {
+            if (is_equal(distance(pos, point), r)) {
                 return new Vector(pos.x - point.x, pos.y - point.y);
             }
         }

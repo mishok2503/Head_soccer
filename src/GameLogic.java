@@ -23,12 +23,12 @@ public class GameLogic {
         return ball.getRadius();
     }
 
-    public Rectangle[] getAllColliders() {
-        return field.getAllColliders();
+    public Rectangle[] getAllRectColliders() {
+        return field.getAllRectColliders();
     }
 
     public void update() {
-        for (Rectangle rect : getAllColliders())
+        for (Rectangle rect : getAllRectColliders())
             ball.CollisionProcessing(rect);
         ball.move(g);
     }

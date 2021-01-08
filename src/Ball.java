@@ -6,7 +6,7 @@ public class Ball {
     private final int radius;
     private final double collisionLoss = 0.05;
     private final double airLoss = 0.002;
-    private Vector speed = new Vector(14, 0);
+    private Vector speed = new Vector(0, 0);
 
     public Ball(Field field, int radius) {
         prevPos = pos = new Vector(field.getBallStartPos());
@@ -30,6 +30,8 @@ public class Ball {
 
     public void CollisionProcessing(Rectangle rect) {
         Vector n = Physics.CheckCollision(pos.getPoint(), radius, rect);
+        if (n.is_zeros())
+            n = Physics.CheckCollision(pos.getPoint(), radius, new Point(0, 0), 0);
         if (!n.is_zeros()) {
             pos = new Vector(prevPos);
             speed.setAngle(Math.PI + 2 * n.getAngle() - speed.getAngle());

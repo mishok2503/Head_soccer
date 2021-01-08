@@ -35,8 +35,10 @@ public class Panel extends JPanel implements ActionListener {
 
     private void drawField(Graphics2D g) {
         g.setColor(Color.GREEN);
-        for (Rectangle rect : gameLogic.getAllColliders())
+        for (Rectangle rect : gameLogic.getAllRectColliders())
             g.fillRect(rect.x, rect.y, rect.width, rect.height);
+        g.setColor(Color.RED);
+        g.fillOval(500, 800, 100, 100);
     }
 
     @Override
