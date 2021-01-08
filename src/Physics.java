@@ -12,8 +12,9 @@ public class Physics {
     }
 
     public static Vector CheckCollision(Point pos, int r, Point pos1, int r1) {
-        pos1 = new Point(550, 850);
-        r1 = 50;//TODO
+        r1 /= 2;
+        pos1.x += r;
+        pos1.y += r;
 
         r /= 2;
         pos.x += r;

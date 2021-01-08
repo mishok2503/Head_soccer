@@ -22,6 +22,7 @@ public class Panel extends JPanel implements ActionListener {
         gameLogic.update();
 
         drawField(g);
+        drawPlayer(g);
         drawBall(g);
     }
 
@@ -33,12 +34,16 @@ public class Panel extends JPanel implements ActionListener {
         g.fillOval(ballPos.x - delta, ballPos.y - delta, r, r);
     }
 
+    private void drawPlayer(Graphics2D g) {
+        g.setColor(Color.RED);
+        for (Rectangle rect : gameLogic.getPlayerRects())
+            g.fillRect(rect.x, rect.y, rect.width, rect.height);
+    }
+
     private void drawField(Graphics2D g) {
         g.setColor(Color.GREEN);
-        for (Rectangle rect : gameLogic.getAllRectColliders())
+        for (Rectangle rect : gameLogic.getBorderRects())
             g.fillRect(rect.x, rect.y, rect.width, rect.height);
-        g.setColor(Color.RED);
-        g.fillOval(500, 800, 100, 100);
     }
 
     @Override

@@ -1,8 +1,10 @@
+import java.awt.*;
+
 public class Game {
 
     private final Field field = new Field();
     private final Ball ball = new Ball(field, 50);
-    private final Player[] players = {new Player(field), new Player(field)};
+    private final Player[] players = {new Player(field, new Point(80, 120), true), new Player(field, new Point(80, 120), false)};
 
     private final GameLogic gameLogic = new GameLogic(ball, players, field, 0.2);
 

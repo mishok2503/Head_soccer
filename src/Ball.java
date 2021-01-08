@@ -6,7 +6,7 @@ public class Ball {
     private final int radius;
     private final double collisionLoss = 0.05;
     private final double airLoss = 0.002;
-    private Vector speed = new Vector(0, 0);
+    private Vector speed = new Vector(16, 0);
 
     public Ball(Field field, int radius) {
         prevPos = pos = new Vector(field.getBallStartPos());

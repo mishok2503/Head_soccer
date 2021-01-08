@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class GameLogic {
 
@@ -23,12 +25,18 @@ public class GameLogic {
         return ball.getRadius();
     }
 
-    public Rectangle[] getAllRectColliders() {
+    public Rectangle[] getBorderRects() {
         return field.getAllRectColliders();
     }
 
+    public Rectangle[] getPlayerRects() {
+        return new Rectangle[]{players[0].getRect(), players[1].getRect()};
+    }
+
     public void update() {
-        for (Rectangle rect : getAllRectColliders())
+        for (Rectangle rect : getBorderRects())
+            ball.CollisionProcessing(rect);
+        for (Rectangle rect : getPlayerRects())
             ball.CollisionProcessing(rect);
         ball.move(g);
     }
