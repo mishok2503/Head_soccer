@@ -4,8 +4,6 @@ public class Ball {
 
     private Vector pos, prevPos;
     private final int radius;
-    private final double collisionLoss = 0.05;
-    private final double airLoss = 0.002;
     private Vector speed = new Vector(16, 0);
 
     public Ball(Field field, int radius) {
@@ -25,6 +23,7 @@ public class Ball {
         prevPos = new Vector(pos);
         speed.y += g;
         pos.add(speed);
+        double airLoss = 0.002;
         speed.mul(1 - airLoss);
     }
 
@@ -35,6 +34,7 @@ public class Ball {
         if (!n.is_zeros()) {
             pos = new Vector(prevPos);
             speed.setAngle(Math.PI + 2 * n.getAngle() - speed.getAngle());
+            double collisionLoss = 0.05;
             speed.mul(1 - collisionLoss);
         }
     }

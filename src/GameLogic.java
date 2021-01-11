@@ -38,6 +38,14 @@ public class GameLogic {
             ball.CollisionProcessing(rect);
         for (Rectangle rect : getPlayerRects())
             ball.CollisionProcessing(rect);
+        for (Player player : players) {
+            for (Rectangle rect : getBorderRects())
+                player.CollisionProcessing(rect);
+            for (Player otherPlayer : players)
+                if (otherPlayer != player)
+                    player.CollisionProcessing(otherPlayer.getRect());
+            player.move(g);
+        }
         ball.move(g);
     }
 
