@@ -4,7 +4,7 @@ public class Ball {
 
     private Vector pos, prevPos;
     private final int radius;
-    private Vector speed = new Vector(16, 0);
+    private Vector speed = new Vector(13, 0);
 
     public Ball(Field field, int radius) {
         prevPos = pos = new Vector(field.getBallStartPos());
@@ -27,10 +27,12 @@ public class Ball {
         speed.mul(1 - airLoss);
     }
 
-    public void CollisionProcessing(Rectangle rect) {
-        Vector n = Physics.CheckCollision(pos.getPoint(), radius, rect);
-        if (n.is_zeros())
-            n = Physics.CheckCollision(pos.getPoint(), radius, new Point(0, 0), 0);
+    public void CollisionProcessing(Rectangle rect, boolean isCircle) {
+        Vector n;
+        if (isCircle)
+            n = Physics.CheckCollision(pos.getPoint(), radius, new Point(rect.x, rect.y), rect.width);
+        else
+            n = Physics.CheckCollision(pos.getPoint(), radius, rect);
         if (!n.is_zeros()) {
             pos = new Vector(prevPos);
             speed.setAngle(Math.PI + 2 * n.getAngle() - speed.getAngle());

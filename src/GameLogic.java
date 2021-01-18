@@ -33,11 +33,16 @@ public class GameLogic {
         return new Rectangle[]{players[0].getRect(), players[1].getRect()};
     }
 
+    public Rectangle[] getPlayerCircles() {
+        return Stream.concat(Arrays.stream(players[0].getCircles()), Arrays.stream(players[1].getCircles())).toArray(Rectangle[]::new);
+    }
+
+
     public void update() {
         for (Rectangle rect : getBorderRects())
-            ball.CollisionProcessing(rect);
+            ball.CollisionProcessing(rect, false);
         for (Rectangle rect : getPlayerRects())
-            ball.CollisionProcessing(rect);
+            ball.CollisionProcessing(rect, false);
         for (Player player : players) {
             for (Rectangle rect : getBorderRects())
                 player.CollisionProcessing(rect);
@@ -46,6 +51,9 @@ public class GameLogic {
                     player.CollisionProcessing(otherPlayer.getRect());
             player.move(g);
         }
+        for (Rectangle rect : getPlayerCircles())
+            ball.CollisionProcessing(rect, true);
+
         ball.move(g);
     }
 

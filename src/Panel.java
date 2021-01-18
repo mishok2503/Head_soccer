@@ -38,6 +38,8 @@ public class Panel extends JPanel implements ActionListener {
         g.setColor(Color.RED);
         for (Rectangle rect : gameLogic.getPlayerRects())
             g.fillRect(rect.x, rect.y, rect.width, rect.height);
+        for (Rectangle rect : gameLogic.getPlayerCircles())
+            g.fillOval(rect.x, rect.y, rect.width, rect.height);
     }
 
     private void drawField(Graphics2D g) {

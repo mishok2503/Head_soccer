@@ -3,6 +3,8 @@ import java.awt.*;
 public class Player {
 
     private Vector pos, prevPos;
+    private Vector headPos = new Vector(0, -80);;
+    private int headR = 80;
     private Vector speed = new Vector(0, 0);
     private final Point size;
     private final boolean isLeft;
@@ -15,6 +17,9 @@ public class Player {
 
     public Rectangle getRect() {
         return new Rectangle((int) pos.x, (int) pos.y, size.x, size.y);
+    }
+    public Rectangle[] getCircles() {
+        return  new Rectangle[]{new Rectangle((int) (pos.x + headPos.x), (int) (pos.y + headPos.y), headR, headR)};
     }
 
     public void CollisionProcessing(Rectangle rect) {
