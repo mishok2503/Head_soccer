@@ -57,4 +57,8 @@ public class GameLogic {
         ball.move(g);
     }
 
+    public void movePlayer(int player, Vector a) {
+        players[player].addSpeed(a);
+    }
+
 }

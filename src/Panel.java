@@ -8,7 +8,7 @@ public class Panel extends JPanel implements ActionListener {
 
     public Panel(GameLogic gameLogic, int fps) {
         this.gameLogic = gameLogic;
-        addKeyListener(new KeyListener());
+        addKeyListener(new KeyListener(gameLogic));
         setFocusable(true);
         Timer timer = new Timer(1000 / fps, this);
         timer.start();

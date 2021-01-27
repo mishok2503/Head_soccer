@@ -24,7 +24,7 @@ public class Player {
 
     public void CollisionProcessing(Rectangle rect) {
         Vector n = Physics.CheckCollision(getRect(), rect);
-        if (!n.is_zeros()) {
+        if (!n.is_zeros()) {//TODO
             if (n.y != 0) {
                 speed.y = 0;
                 pos.y = prevPos.y;
@@ -43,4 +43,8 @@ public class Player {
         speed.mul(1 - airLoss);
     }
 
+    public void addSpeed(Vector a) {
+        //TODO: max speed
+        speed.add(a);
+    }
 }
