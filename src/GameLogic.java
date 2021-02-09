@@ -57,8 +57,11 @@ public class GameLogic {
         ball.move(g);
     }
 
-    public void movePlayer(int player, Vector a) {
-        players[player].addSpeed(a);
+    public void movePlayer(int player, double a, boolean jump) {
+        if (!jump)
+            players[player].setXSpeed(a);
+        else
+            players[player].jump();
     }
 
 }

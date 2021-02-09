@@ -15,13 +15,17 @@ public class KeyListener extends KeyAdapter {
         int key = e.getKeyCode();
 
         if (key == KeyEvent.VK_A)
-            gameLogic.movePlayer(0, new Vector(-0.03, 0));//TODO: add acceleration varible
+            gameLogic.movePlayer(0, -2, false);//TODO: remove constants
         if (key == KeyEvent.VK_D)
-            gameLogic.movePlayer(0, new Vector(0.03, 0));
+            gameLogic.movePlayer(0, 2, false);
+        if (key == KeyEvent.VK_W)
+            gameLogic.movePlayer(0, 0, true);
         if (key == KeyEvent.VK_LEFT)
-            gameLogic.movePlayer(1, new Vector(-0.03, 0));
+            gameLogic.movePlayer(1, -2, false);
         if (key == KeyEvent.VK_RIGHT)
-            gameLogic.movePlayer(1, new Vector(0.03, 0));
+            gameLogic.movePlayer(1, 2, false);
+        if (key == KeyEvent.VK_UP)
+            gameLogic.movePlayer(1, 0, true);
     }
 
     @Override
@@ -30,6 +34,9 @@ public class KeyListener extends KeyAdapter {
 
         int key = e.getKeyCode();
 
-
+        if (key == KeyEvent.VK_A || key == KeyEvent.VK_D)//TODO: two buttons press
+            gameLogic.movePlayer(0, 0, false);
+        if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_LEFT)
+            gameLogic.movePlayer(1, 0, false);
     }
 }

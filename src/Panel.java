@@ -39,9 +39,9 @@ public class Panel extends JPanel implements ActionListener {
     private void drawPlayer(Graphics2D g) {
         g.setColor(Color.RED);
         for (Rectangle rect : gameLogic.getPlayerRects())
-            g.fillRect(rect.x, rect.y, rect.width, rect.height);
+            g.fillRect(rect.x, rect.y, rect.width, rect.height + 4);//TODO: remove constants
         for (Rectangle rect : gameLogic.getPlayerCircles())
-            g.fillOval(rect.x, rect.y, rect.width, rect.height);
+            g.fillOval(rect.x, rect.y, rect.width , rect.height);
     }
 
     private void drawField(Graphics2D g) {
