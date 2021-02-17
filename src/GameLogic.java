@@ -49,6 +49,10 @@ public class GameLogic {
             for (Player otherPlayer : players)
                 if (otherPlayer != player)
                     player.CollisionProcessing(otherPlayer.getRect());
+            if (players[0].getRect().x + players[0].getRect().width >= players[1].getRect().x)
+                player.setMoveBlock(player == players[0] ? 1 : -1);
+            else
+                player.setMoveBlock(0);
             player.move(g);
         }
         for (Rectangle rect : getPlayerCircles())

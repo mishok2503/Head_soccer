@@ -4,7 +4,7 @@ public class Player {
 
     private Vector pos, prevPos;
     private Vector headPos = new Vector(0, -80);;
-    private int headR = 80;
+    private int headR = 80, moveBlock = 0;
     private Vector speed = new Vector(0, 0);
     private final Point size;
     private final boolean isLeft;
@@ -27,10 +27,8 @@ public class Player {
         Vector n = Physics.CheckCollision(getRect(), rect);
         if (!n.is_zeros()) {//TODO
             if (n.y != 0) {
-                if (!isOnFloor) {
-                    speed.y = 0;
-                    pos.y = prevPos.y;
-                }
+                speed.y = 0;
+                pos.y = prevPos.y;
                 isOnFloor = true;
             } else {
                 speed.x = 0;
@@ -43,9 +41,15 @@ public class Player {
         prevPos = new Vector(pos);
         if (!isOnFloor)
             speed.y += g;
+        if (moveBlock * speed.x > 0)
+            speed.x = 0;
         pos.add(speed);
         double airLoss = 0.004;
         speed.mul(1 - airLoss);
+    }
+
+    public void setMoveBlock(int block) {
+        moveBlock = block;
     }
 
     public void setXSpeed(double a) {
@@ -56,7 +60,7 @@ public class Player {
         if (isOnFloor) {
             isOnFloor = false;
             pos.y += -10;
-            speed.y += -10;//TODO: remove constant
+            speed.y += -9;//TODO: remove constant
         }
     }
 }
