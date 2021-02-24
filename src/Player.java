@@ -48,6 +48,10 @@ public class Player {
         speed.mul(1 - airLoss);
     }
 
+    public Vector getSpeed() {
+        return speed;
+    }
+
     public void setMoveBlock(int block) {
         moveBlock = block;
     }

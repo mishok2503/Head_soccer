@@ -27,6 +27,8 @@ public class Ball {
         speed.mul(1 - airLoss);
     }
 
+    public Vector temp = new Vector(0, 0);//TODO: it's very bad
+
     public void CollisionProcessing(Rectangle rect, boolean isCircle) {
         Vector n;
         if (isCircle)
@@ -36,8 +38,10 @@ public class Ball {
         if (!n.is_zeros()) {
             pos = new Vector(prevPos);
             speed.setAngle(Math.PI + 2 * n.getAngle() - speed.getAngle());
+            temp.mul(-2);//TODO
+            speed.add(temp);
             double collisionLoss = 0.05;
-            speed.mul(1 - collisionLoss);
+            //speed.mul(1 - collisionLoss);
         }
     }
 }

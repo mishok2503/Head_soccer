@@ -2,6 +2,8 @@ import java.awt.*;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
+import static java.lang.Math.max;
+
 public class GameLogic {
 
     private final Ball ball;
@@ -55,9 +57,10 @@ public class GameLogic {
                 player.setMoveBlock(0);
             player.move(g);
         }
+        ball.temp = players[0].getSpeed();
         for (Rectangle rect : getPlayerCircles())
             ball.CollisionProcessing(rect, true);
-
+        ball.temp = new Vector(0, 0);
         ball.move(g);
     }
 
