@@ -24,16 +24,13 @@ public class Player {
     }
 
     public void CollisionProcessing(Rectangle rect) {
-        Vector n = Physics.CheckCollision(getRect(), rect);
-        if (!n.is_zeros()) {//TODO
-            if (n.y != 0) {
-                speed.y = 0;
-                pos.y = prevPos.y;
-                isOnFloor = true;
-            } else {
-                speed.x = 0;
-                pos.x = prevPos.x;
-            }
+        if (pos.x < rect.x || pos.x + size.x > rect.x + rect.width) {
+            pos.x = prevPos.x;
+            speed.x = 0;
+        }
+        if (pos.y < rect.y || pos.y + size.y > rect.y + rect.height) {
+            pos.y = prevPos.y;
+            speed.y = 0;
         }
     }
 

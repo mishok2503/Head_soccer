@@ -11,21 +11,6 @@ public class Physics {
         return Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
     }
 
-    public static Vector CheckCollision(Rectangle rect, Rectangle rect1) {
-        if (rect.intersects(rect1)) {
-            if (rect.y + rect.height > rect1.y) //TODO
-                return new Vector(0, 1);
-            if (rect.y < rect1.y + rect1.height)
-                return new Vector(0, -1);
-//            if (rect.x < rect1.x + rect1.width)
-//                return new Vector(1, 0);
-//            if (rect.x + rect.width > rect1.x)
-//                return new Vector(-1, 0);
-        }
-
-        return new Vector(0, 0);
-    }
-
     public static Vector CheckCollision(Point pos, int r, Point pos1, int r1) {
         r1 /= 2;
         pos1.x += r;

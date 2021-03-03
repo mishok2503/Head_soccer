@@ -6,9 +6,9 @@ public class Field {
     private final Point leftPlayertartPos = new Point(150, 750);
     private final Point rightPlayertartPos = new Point(1000, 750);
 
-    private final Rectangle bottomBorderRect = new Rectangle(0, 920, 1200, 50);
+    private final Rectangle bottomBorderRect = new Rectangle(0, 900, 1200, 100);
     private final Rectangle leftBorderRect = new Rectangle(0, 0, 50, 1000);
-    private final Rectangle rightBorderRect = new Rectangle(1135, 0, 50, 1000);
+    private final Rectangle rightBorderRect = new Rectangle(1150, 0, 100, 1000);
     private final Rectangle topBorderRect = new Rectangle(0, 0, 1200, 50);
 
     public Rectangle[] getAllRectColliders() {

@@ -46,18 +46,14 @@ public class GameLogic {
         for (Rectangle rect : getPlayerRects())
             ball.CollisionProcessing(rect, false);
         for (Player player : players) {
-            for (Rectangle rect : getBorderRects())
-                player.CollisionProcessing(rect);
-            for (Player otherPlayer : players)
-                if (otherPlayer != player)
-                    player.CollisionProcessing(otherPlayer.getRect());
+            player.CollisionProcessing(new Rectangle(50, 50, 1100, 850)); //TODO: magic numbers
             if (players[0].getRect().x + players[0].getRect().width >= players[1].getRect().x)
                 player.setMoveBlock(player == players[0] ? 1 : -1);
             else
                 player.setMoveBlock(0);
             player.move(g);
         }
-        ball.temp = players[0].getSpeed();
+        ball.temp = players[0].getSpeed();//TODO
         for (Rectangle rect : getPlayerCircles())
             ball.CollisionProcessing(rect, true);
         ball.temp = new Vector(0, 0);
