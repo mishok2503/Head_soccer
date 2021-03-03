@@ -5,15 +5,15 @@ public class Player {
     private Vector pos, prevPos;
     private Vector headPos = new Vector(0, -80);;
     private int headR = 80, moveBlock = 0;
+    private final int countsPerFrame;
     private Vector speed = new Vector(0, 0);
     private final Point size;
-    private final boolean isLeft;
     private boolean isOnFloor = false ;
 
-    public Player(Field field, Point size, boolean isLeft) {
-        this.isLeft = isLeft;
+    public Player(Field field, Point size, boolean isLeft, int countsPerFrame) {
         this.size = size;
-        prevPos = pos = new Vector(field.getPlayerStartPos(this.isLeft));
+        this.countsPerFrame = countsPerFrame;
+        prevPos = pos = new Vector(field.getPlayerStartPos(isLeft));
     }
 
     public Rectangle getRect() {
@@ -28,9 +28,10 @@ public class Player {
             pos.x = prevPos.x;
             speed.x = 0;
         }
-        if (pos.y < rect.y || pos.y + size.y > rect.y + rect.height) {
+        if (pos.y < rect.y || pos.y + size.y + headR > rect.y + rect.height) {
             pos.y = prevPos.y;
             speed.y = 0;
+            isOnFloor = true;
         }
     }
 
@@ -40,7 +41,7 @@ public class Player {
             speed.y += g;
         if (moveBlock * speed.x > 0)
             speed.x = 0;
-        pos.add(speed);
+        pos.add(speed.frameSpeed(countsPerFrame));
         double airLoss = 0.004;
         speed.mul(1 - airLoss);
     }
@@ -53,15 +54,14 @@ public class Player {
         moveBlock = block;
     }
 
-    public void setXSpeed(double a) {
-        speed = new Vector(a, speed.y);
+    public void setXSpeed(double speedX) {
+        speed.x = speedX;
     }
 
     public void jump() {
         if (isOnFloor) {
             isOnFloor = false;
-            pos.y += -10;
-            speed.y += -9;//TODO: remove constant
+            speed.y -= 9;//TODO: remove constant
         }
     }
 }

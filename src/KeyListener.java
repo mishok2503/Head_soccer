@@ -14,16 +14,17 @@ public class KeyListener extends KeyAdapter {
 
         int key = e.getKeyCode();
 
+        int speedX = 3;
         if (key == KeyEvent.VK_A)
-            gameLogic.movePlayer(0, -2, false);//TODO: remove constants
+            gameLogic.movePlayer(0, -speedX, false);//TODO: remove constants
         if (key == KeyEvent.VK_D)
-            gameLogic.movePlayer(0, 2, false);
+            gameLogic.movePlayer(0, speedX, false);
         if (key == KeyEvent.VK_W)
             gameLogic.movePlayer(0, 0, true);
         if (key == KeyEvent.VK_LEFT)
-            gameLogic.movePlayer(1, -2, false);
+            gameLogic.movePlayer(1, -speedX, false);
         if (key == KeyEvent.VK_RIGHT)
-            gameLogic.movePlayer(1, 2, false);
+            gameLogic.movePlayer(1, speedX, false);
         if (key == KeyEvent.VK_UP)
             gameLogic.movePlayer(1, 0, true);
     }

@@ -2,7 +2,7 @@ import java.awt.*;
 
 public class Physics {
 
-    public static double eps = 10;//TODO
+    public static double eps = 1;//TODO
     public static boolean is_equal(double a, double b) {
         return a <= b + eps && a >= b - eps;
     }

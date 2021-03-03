@@ -5,12 +5,13 @@ import java.awt.event.*;
 public class Panel extends JPanel implements ActionListener {
 
     private final GameLogic gameLogic;
+    int counts = 0;
 
     public Panel(GameLogic gameLogic, int fps) {
         this.gameLogic = gameLogic;
         addKeyListener(new KeyListener(gameLogic));
         setFocusable(true);
-        Timer timer = new Timer(1000 / fps, this);
+        Timer timer = new Timer(1000 / (fps * gameLogic.getCountsPerFrame()), this);
         timer.start();
     }
 
@@ -52,6 +53,10 @@ public class Panel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        repaint();
+        counts++;
+        if (counts == gameLogic.getCountsPerFrame()) {
+            counts = 0;
+            repaint();
+        }
     }
 }

@@ -3,8 +3,8 @@ import java.awt.*;
 public class Field {
 
     private final Point ballStartPos = new Point(600, 500);
-    private final Point leftPlayertartPos = new Point(150, 750);
-    private final Point rightPlayertartPos = new Point(1000, 750);
+    private final Point leftPlayerStartPos = new Point(150, 750);
+    private final Point rightPlayerStartPos = new Point(1000, 750);
 
     private final Rectangle bottomBorderRect = new Rectangle(0, 900, 1200, 100);
     private final Rectangle leftBorderRect = new Rectangle(0, 0, 50, 1000);
@@ -21,7 +21,7 @@ public class Field {
 
     public Point getPlayerStartPos(boolean isLeft) {
         if (isLeft)
-            return leftPlayertartPos;
-        return rightPlayertartPos;
+            return leftPlayerStartPos;
+        return rightPlayerStartPos;
     }
 }

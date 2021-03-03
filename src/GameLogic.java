@@ -9,14 +9,16 @@ public class GameLogic {
     private final Ball ball;
     private final Player[] players;
     private final Field field;
+    private final int countsPerFrame;
 
     private final double g;
 
-    public GameLogic(Ball ball, Player[] players, Field field, double g) {
+    public GameLogic(Ball ball, Player[] players, Field field, double g, int countsPerFrame) {
         this.ball = ball;
         this.players = players;
         this.field = field;
         this.g = g;
+        this.countsPerFrame = countsPerFrame;
     }
 
     public Point getBallPos() {
@@ -67,4 +69,7 @@ public class GameLogic {
             players[player].jump();
     }
 
+    public int getCountsPerFrame() {
+        return countsPerFrame;
+    }
 }

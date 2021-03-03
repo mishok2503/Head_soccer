@@ -5,8 +5,10 @@ public class Ball {
     private Vector pos, prevPos;
     private final int radius;
     private Vector speed = new Vector(13, 0);
+    private final int countsPerFrame;
 
-    public Ball(Field field, int radius) {
+    public Ball(Field field, int radius, int countsPerFrame) {
+        this.countsPerFrame = countsPerFrame;
         prevPos = pos = new Vector(field.getBallStartPos());
         this.radius = radius;
     }
@@ -21,10 +23,10 @@ public class Ball {
 
     public void move(double g) {
         prevPos = new Vector(pos);
-        speed.y += g;
-        pos.add(speed);
-        double airLoss = 0.002;
-        speed.mul(1 - airLoss);
+        speed.y += g / (double) countsPerFrame;
+        pos.add(speed.frameSpeed(countsPerFrame));
+        double airLoss = 0.002 / (double) countsPerFrame;
+        //speed.mul(1 - airLoss);
     }
 
     public Vector temp = new Vector(0, 0);//TODO: it's very bad
