@@ -43,7 +43,7 @@ public class Player {
             speed.x = 0;
         pos.add(speed.frameSpeed(countsPerFrame));
         double airLoss = 0.004;
-        speed.mul(1 - airLoss);
+        //speed.mul(1 - airLoss);
     }
 
     public Vector getSpeed() {

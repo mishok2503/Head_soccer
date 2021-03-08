@@ -23,9 +23,9 @@ public class Ball {
 
     public void move(double g) {
         prevPos = new Vector(pos);
-        speed.y += g / (double) countsPerFrame;
+        speed.y += g;
         pos.add(speed.frameSpeed(countsPerFrame));
-        double airLoss = 0.002 / (double) countsPerFrame;
+        double airLoss = 0.002;
         //speed.mul(1 - airLoss);
     }
 
