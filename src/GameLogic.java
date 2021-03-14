@@ -44,7 +44,7 @@ public class GameLogic {
         for (Rectangle rect : getPlayerRects())
             ball.CollisionProcessing(rect, false);
         for (Player player : players) {
-            player.CollisionProcessing(new Rectangle(50, 50, 1100, 950)); //TODO: magic numbers
+            player.CollisionProcessing(new Rectangle(50, 50, 1100, 925)); //TODO: magic numbers
             if (players[0].getRect().x + players[0].getRect().width >= players[1].getRect().x)
                 player.setMoveBlock(player == players[0] ? 1 : -1);
             else
