@@ -2,8 +2,6 @@ import java.awt.*;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-import static java.lang.Math.max;
-
 public class GameLogic {
 
     private final Ball ball;
@@ -11,13 +9,10 @@ public class GameLogic {
     private final Field field;
     private final int countsPerFrame;
 
-    private final double g;
-
-    public GameLogic(Ball ball, Player[] players, Field field, double g, int countsPerFrame) {
+    public GameLogic(Ball ball, Player[] players, Field field, int countsPerFrame) {
         this.ball = ball;
         this.players = players;
         this.field = field;
-        this.g = g / countsPerFrame;
         this.countsPerFrame = countsPerFrame;
     }
 
@@ -42,7 +37,8 @@ public class GameLogic {
     }
 
 
-    public void update() {
+    public void update(double dt) {
+        System.out.println(dt);//TODO: remove
         for (Rectangle rect : getBorderRects())
             ball.CollisionProcessing(rect, false);
         for (Rectangle rect : getPlayerRects())
@@ -53,13 +49,13 @@ public class GameLogic {
                 player.setMoveBlock(player == players[0] ? 1 : -1);
             else
                 player.setMoveBlock(0);
-            player.move(g);
+            player.move(dt);
         }
         ball.temp = players[0].getSpeed();//TODO
         for (Rectangle rect : getPlayerCircles())
             ball.CollisionProcessing(rect, true);
         ball.temp = new Vector(0, 0);
-        ball.move(g);
+        ball.move(dt);
     }
 
     public void movePlayer(int player, double a, boolean jump) {

@@ -5,7 +5,8 @@ import java.awt.event.*;
 public class Panel extends JPanel implements ActionListener {
 
     private final GameLogic gameLogic;
-    int counts = 0;
+    int counts = 0; //TODO
+    private long lt;
 
     public Panel(GameLogic gameLogic, int fps) {
         this.gameLogic = gameLogic;
@@ -13,6 +14,7 @@ public class Panel extends JPanel implements ActionListener {
         setFocusable(true);
         Timer timer = new Timer(1000 / (fps * gameLogic.getCountsPerFrame()), this);
         timer.start();
+        lt = System.nanoTime();
     }
 
     public void paintComponent(Graphics graphics) {
@@ -21,8 +23,6 @@ public class Panel extends JPanel implements ActionListener {
         this.setBackground(Color.BLACK);
 
         Graphics2D g = (Graphics2D) graphics;
-
-        gameLogic.update();
 
         drawField(g);
         drawPlayer(g);
@@ -53,6 +53,9 @@ public class Panel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        long ct = System.nanoTime();
+        gameLogic.update((ct - lt) / (1 * 1e7));
+        lt = ct;
         counts++;
         if (counts == gameLogic.getCountsPerFrame()) {
             counts = 0;

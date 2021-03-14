@@ -5,14 +5,14 @@ public class Player {
     private Vector pos, prevPos;
     private Vector headPos = new Vector(0, -80);;
     private int headR = 80, moveBlock = 0;
-    private final int countsPerFrame;
     private Vector speed = new Vector(0, 0);
     private final Point size;
-    private boolean isOnFloor = false ;
+    private boolean isOnFloor = false;
+    private final double g;
 
-    public Player(Field field, Point size, boolean isLeft, int countsPerFrame) {
+    public Player(Field field, Point size, boolean isLeft, double g) {
         this.size = size;
-        this.countsPerFrame = countsPerFrame;
+        this.g = g;
         prevPos = pos = new Vector(field.getPlayerStartPos(isLeft));
     }
 
@@ -35,14 +35,14 @@ public class Player {
         }
     }
 
-    public void move(double g) {
+    public void move(double dt) {
         prevPos = new Vector(pos);
         if (!isOnFloor)
-            speed.y += g;
+            speed.y += g * dt;
         if (moveBlock * speed.x > 0)
             speed.x = 0;
-        pos.add(speed.frameSpeed(countsPerFrame));
-        double airLoss = 0.004;
+        pos.add(new Vector(speed.x * dt, speed.y * dt));
+        //double airLoss = 0.004 * dt;
         //speed.mul(1 - airLoss);
     }
 

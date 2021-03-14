@@ -19,10 +19,6 @@ public class Vector {
         y = p.y;
     }
 
-    public Vector frameSpeed(int d) {
-        return new Vector(x / (double) d, y / (double) d);
-    }
-
     public double abs() {
         return Math.sqrt(x * x + y * y);
     }
