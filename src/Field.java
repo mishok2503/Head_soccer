@@ -2,7 +2,7 @@ import java.awt.*;
 
 public class Field {
 
-    private final Point ballStartPos = new Point(600, 500);
+    private final Point ballStartPos = new Point(600, 600);
     private final Point leftPlayerStartPos = new Point(150, 700);
     private final Point rightPlayerStartPos = new Point(1000, 700);
 

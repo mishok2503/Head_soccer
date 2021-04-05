@@ -27,6 +27,9 @@ public class KeyListener extends KeyAdapter {
             gameLogic.movePlayer(1, speedX, false);
         if (key == KeyEvent.VK_UP)
             gameLogic.movePlayer(1, 0, true);
+
+        if (key == KeyEvent.VK_R)
+            gameLogic.ballReset();
     }
 
     @Override

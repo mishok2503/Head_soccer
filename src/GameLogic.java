@@ -16,6 +16,12 @@ public class GameLogic {
         this.countsPerFrame = countsPerFrame;
     }
 
+    public void ballReset()
+    {
+        ball.setPos(field.getBallStartPos());
+        ball.setSpeed(new Vector(0, 0));
+    }
+
     public Point getBallPos() {
         return ball.getPos();
     }
@@ -33,28 +39,25 @@ public class GameLogic {
     }
 
     public Rectangle[] getPlayerCircles() {
-        return Stream.concat(Arrays.stream(players[0].getCircles()), Arrays.stream(players[1].getCircles())).toArray(Rectangle[]::new);
+        return new Rectangle[] { players[0].getCircle(), players[1].getCircle() };
     }
 
 
     public void update(double dt) {
-        System.out.println(dt);//TODO: remove
+        boolean ballBetween = ball.betweenPlayers(players[0].getRect(), players[1].getRect());
         for (Rectangle rect : getBorderRects())
-            ball.CollisionProcessing(rect, false);
-        for (Rectangle rect : getPlayerRects())
-            ball.CollisionProcessing(rect, false);
+            ball.CollisionProcessing(rect, new Vector(0, 0), false);
         for (Player player : players) {
             player.CollisionProcessing(new Rectangle(50, 50, 1100, 925)); //TODO: magic numbers
-            if (players[0].getRect().x + players[0].getRect().width >= players[1].getRect().x)
+            if (ballBetween || (players[0].getRect().x + players[0].getRect().width >= players[1].getRect().x))
                 player.setMoveBlock(player == players[0] ? 1 : -1);
             else
                 player.setMoveBlock(0);
             player.move(dt);
+            ball.CollisionProcessing(player.getRect(), player.getSpeed(), false);
+            ball.CollisionProcessing(player.getCircle(), player.getSpeed(), true);
         }
-        ball.temp = players[0].getSpeed();//TODO
-        for (Rectangle rect : getPlayerCircles())
-            ball.CollisionProcessing(rect, true);
-        ball.temp = new Vector(0, 0);
+
         ball.move(dt);
     }
 

@@ -2,7 +2,7 @@ import java.awt.*;
 
 public class Physics {
 
-    public static double eps = 1;//TODO
+    public static double eps = 6;//TODO
     public static boolean is_equal(double a, double b) {
         return a <= b + eps && a >= b - eps;
     }
@@ -20,7 +20,11 @@ public class Physics {
         pos.x += r;
         pos.y += r;
         if (is_equal(distance(pos, pos1), r + r1)) {
-            return new Vector(pos.x - pos1.x, pos.y - pos1.y);
+            Vector res = new Vector(pos.x - pos1.x, pos.y - pos1.y);
+            double d = distance(res.getPoint(), new Point(0, 0));
+            res.x /= d;
+            res.y /= d;
+            return res;
         }
 
         return new Vector(0, 0);
@@ -46,7 +50,11 @@ public class Physics {
         pos.y += r;
         for (Point point : points) {
             if (is_equal(distance(pos, point), r)) {
-                return new Vector(pos.x - point.x, pos.y - point.y);
+                Vector res = new Vector(pos.x - point.x, pos.y - point.y);
+                double d = distance(res.getPoint(), new Point(0, 0));
+                res.x /= d;
+                res.y /= d;
+                return res;
             }
         }
 

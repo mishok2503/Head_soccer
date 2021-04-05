@@ -39,6 +39,11 @@ public class Vector {
         y *= k;
     }
 
+    public boolean isIn(Rectangle rect)
+    {
+        return x > rect.x && x < rect.x + rect.width && y > rect.y && y < rect.y + rect.height;
+    }
+
     public double getAngle() {
         return Math.atan(y / x) + (x < 0 ? Math.PI : 0);
     }
