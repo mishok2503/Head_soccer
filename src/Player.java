@@ -1,4 +1,5 @@
 import java.awt.*;
+import static java.lang.Math.min;
 
 public class Player {
 
@@ -7,7 +8,7 @@ public class Player {
     private int headR = 80, moveBlock = 0;
     private Vector speed = new Vector(0, 0);
     private final Point size;
-    private boolean isOnFloor = false;
+    private boolean isOnFloor = false, isOnBall = false;
     private final double g;
 
     public Player(Field field, Point size, boolean isLeft, double g) {
@@ -44,12 +45,28 @@ public class Player {
         }
     }
 
+    public boolean onBall(Rectangle ball)
+    {
+        isOnBall = false;
+        if (ball.y < 830) //TODO: magic numbers
+            return false;
+        if (ball.x + 6 > pos.x && ball.x + ball.width < pos.x + size.x + 8 && ball.x < pos.y + size.y) { //TODO: magic numbers
+            if (ball.y  - 12 < pos.y + size.y) {//TODO: magic numbers
+                isOnBall = true;
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void move(double dt) {
         prevPos = new Vector(pos);
-        if (!isOnFloor)
+        if (!isOnFloor && !isOnBall)
             speed.y += g * dt;
         if (moveBlock * speed.x > 0)
             speed.x = 0;
+        if (isOnBall)
+            speed.y = min(0, speed.y);
         pos.add(new Vector(speed.x * dt, speed.y * dt));
     }
 
@@ -66,7 +83,7 @@ public class Player {
     }
 
     public void jump() {
-        if (isOnFloor) {
+        if (isOnFloor || isOnBall) {
             isOnFloor = false;
             speed.y -= 9;//TODO: remove constant
         }

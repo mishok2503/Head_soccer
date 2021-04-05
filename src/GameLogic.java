@@ -53,9 +53,12 @@ public class GameLogic {
                 player.setMoveBlock(player == players[0] ? 1 : -1);
             else
                 player.setMoveBlock(0);
+            boolean isOnBall = player.onBall(ball.getRect());
             player.move(dt);
             ball.CollisionProcessing(player.getRect(), player.getSpeed(), false);
             ball.CollisionProcessing(player.getCircle(), player.getSpeed(), true);
+            if (isOnBall)
+                ball.setSpeed(new Vector(0, 0));
         }
 
         ball.move(dt);

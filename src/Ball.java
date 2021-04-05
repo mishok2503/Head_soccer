@@ -4,14 +4,14 @@ import static java.lang.Math.max;
 
 public class Ball {
 
-    private Vector pos, prevPos;
+    private Vector pos;
     private final int radius;
     private Vector speed = new Vector(0, 0);
     private final double g;
 
     public Ball(Field field, int radius, double g) {
         this.g = g;
-        prevPos = pos = new Vector(field.getBallStartPos());
+        pos = new Vector(field.getBallStartPos());
         this.radius = radius;
     }
 
@@ -48,7 +48,6 @@ public class Ball {
     }
 
     public void move(double dt) {
-        prevPos = new Vector(pos);
         speed.y += g * dt;
         pos.add(new Vector(speed.x * dt, speed.y * dt));
         if (pos.y > 835) //TODO: magic numbers
