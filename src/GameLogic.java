@@ -1,6 +1,4 @@
 import java.awt.*;
-import java.util.Arrays;
-import java.util.stream.Stream;
 
 public class GameLogic {
 
@@ -48,7 +46,7 @@ public class GameLogic {
         for (Rectangle rect : getBorderRects())
             ball.CollisionProcessing(rect, new Vector(0, 0), false);
         for (Player player : players) {
-            player.CollisionProcessing(new Rectangle(50, 50, 1100, 925)); //TODO: magic numbers
+            player.CollisionProcessing(new Rectangle(20, 50, 1160, 925)); //TODO: magic numbers
             if (ballBetween || (players[0].getRect().x + players[0].getRect().width >= players[1].getRect().x))
                 player.setMoveBlock(player == players[0] ? 1 : -1);
             else
@@ -62,6 +60,14 @@ public class GameLogic {
         }
 
         ball.move(dt);
+        if (ball.getPos().x + ball.getRadius() + 5 < 0)
+        {
+            ballReset();
+        }
+        if (ball.getPos().x > 1205)
+        {
+            ballReset();
+        }
     }
 
     public void movePlayer(int player, double a, boolean jump) {
