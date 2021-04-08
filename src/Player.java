@@ -82,6 +82,18 @@ public class Player {
         speed.x = speedX;
     }
 
+    public void setSpeed(Vector speed) {
+        this.speed = speed;
+    }
+
+    public void setOnFloor(boolean onFloor) {
+        isOnFloor = onFloor;
+    }
+
+    public void setPos(Point pos) {
+        this.pos = new Vector(pos);
+    }
+
     public void jump() {
         if (isOnFloor || isOnBall) {
             isOnFloor = false;

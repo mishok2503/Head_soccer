@@ -6,7 +6,7 @@ public class Ball {
 
     private Vector pos;
     private final int radius;
-    private Vector speed = new Vector(0, 0);
+    private Vector speed = new Vector(0, -3);
     private final double g;
 
     public Ball(Field field, int radius, double g) {

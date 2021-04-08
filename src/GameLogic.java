@@ -6,6 +6,8 @@ public class GameLogic {
     private final Player[] players;
     private final Field field;
     private final int countsPerFrame;
+    private boolean wait = true;
+    private double waitTime = 150, curWaitTime = 0;
 
     public GameLogic(Ball ball, Player[] players, Field field, int countsPerFrame) {
         this.ball = ball;
@@ -17,7 +19,17 @@ public class GameLogic {
     public void ballReset()
     {
         ball.setPos(field.getBallStartPos());
-        ball.setSpeed(new Vector(0, 0));
+        ball.setSpeed(new Vector(0, -3));
+    }
+
+    public void playersReset()
+    {
+        for (Player player : players)
+        {
+            player.setSpeed(new Vector(0, 0));
+            player.setOnFloor(false);
+            player.setPos(field.getPlayerStartPos(player == players[0]));
+        }
     }
 
     public Point getBallPos() {
@@ -59,14 +71,28 @@ public class GameLogic {
                 ball.setSpeed(new Vector(0, 0));
         }
 
-        ball.move(dt);
+        if (wait)
+            curWaitTime += dt;
+        if (curWaitTime > waitTime)
+        {
+            wait = false;
+            curWaitTime = 0;
+        }
+
+        if (!wait)
+            ball.move(dt);
+
         if (ball.getPos().x + ball.getRadius() + 5 < 0)
         {
             ballReset();
+            playersReset();
+            wait = true;
         }
         if (ball.getPos().x > 1205)
         {
+            wait = true;
             ballReset();
+            playersReset();
         }
     }
 
