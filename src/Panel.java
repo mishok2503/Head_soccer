@@ -5,8 +5,11 @@ import java.awt.event.*;
 public class Panel extends JPanel implements ActionListener {
 
     private final GameLogic gameLogic;
-    int counts = 0; //TODO
+    private int counts = 0;
     private long lt;
+
+    private final Image rightGoal = new ImageIcon("res/right_goal.png").getImage();
+    private final Image leftGoal = new ImageIcon("res/left_goal.png").getImage();
 
     public Panel(GameLogic gameLogic, int fps) {
         this.gameLogic = gameLogic;
@@ -27,6 +30,9 @@ public class Panel extends JPanel implements ActionListener {
         drawField(g);
         drawPlayer(g);
         drawBall(g);
+
+        g.drawImage(rightGoal, 1140, 500, null);
+        g.drawImage(leftGoal, -185, 500, null);
     }
 
     private void drawBall(Graphics2D g) {

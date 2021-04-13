@@ -82,13 +82,13 @@ public class GameLogic {
         if (!wait)
             ball.move(dt);
 
-        if (ball.getPos().x + ball.getRadius() + 5 < 0)
+        if (ball.getPos().x + ball.getRadius() < 10)
         {
             ballReset();
             playersReset();
             wait = true;
         }
-        if (ball.getPos().x > 1205)
+        if (ball.getPos().x > 1190)
         {
             wait = true;
             ballReset();
