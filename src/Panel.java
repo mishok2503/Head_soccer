@@ -27,12 +27,18 @@ public class Panel extends JPanel implements ActionListener {
 
         Graphics2D g = (Graphics2D) graphics;
 
+        g.setFont(new Font(null, Font.BOLD, 100));
+
         drawField(g);
         drawPlayer(g);
         drawBall(g);
 
         g.drawImage(rightGoal, 1140, 500, null);
         g.drawImage(leftGoal, -185, 500, null);
+
+        g.setColor(Color.white);
+        Point score = gameLogic.getScore();
+        g.drawString(String.valueOf(score.x) + ":" + String.valueOf(score.y), 520 - (score.x > 9 ? 60 : 0), 200);
     }
 
     private void drawBall(Graphics2D g) {

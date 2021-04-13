@@ -8,6 +8,7 @@ public class GameLogic {
     private final int countsPerFrame;
     private boolean wait = true;
     private double waitTime = 150, curWaitTime = 0;
+    private int lScore = 0, rScore = 0;
 
     public GameLogic(Ball ball, Player[] players, Field field, int countsPerFrame) {
         this.ball = ball;
@@ -82,18 +83,22 @@ public class GameLogic {
         if (!wait)
             ball.move(dt);
 
-        if (ball.getPos().x + ball.getRadius() < 10)
-        {
+        if (ball.getPos().x + ball.getRadius() < 10) {
+            rScore++;
             ballReset();
             playersReset();
             wait = true;
         }
-        if (ball.getPos().x > 1190)
-        {
+        if (ball.getPos().x > 1190) {
+            lScore++;
             wait = true;
             ballReset();
             playersReset();
         }
+    }
+
+    Point getScore() {
+        return new Point(lScore, rScore);
     }
 
     public void movePlayer(int player, double a, boolean jump) {
