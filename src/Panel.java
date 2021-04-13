@@ -10,6 +10,7 @@ public class Panel extends JPanel implements ActionListener {
 
     private final Image rightGoal = new ImageIcon("res/right_goal.png").getImage();
     private final Image leftGoal = new ImageIcon("res/left_goal.png").getImage();
+    private final Image ballImage = new ImageIcon("res/ball.png").getImage();
 
     public Panel(GameLogic gameLogic, int fps) {
         this.gameLogic = gameLogic;
@@ -45,8 +46,7 @@ public class Panel extends JPanel implements ActionListener {
         g.setColor(Color.CYAN);
         Point ballPos = gameLogic.getBallPos();
         int delta = (int) Physics.eps;
-        int r = gameLogic.getBallRadius() + 4 * delta;
-        g.fillOval(ballPos.x - 2 * delta, ballPos.y - 2 * delta, r, r);
+        g.drawImage(ballImage, ballPos.x - 2 * delta, ballPos.y - 2 * delta, null);
     }
 
     private void drawPlayer(Graphics2D g) {
