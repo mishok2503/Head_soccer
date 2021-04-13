@@ -87,8 +87,6 @@ public class Ball {
             speed.setAngle(Math.PI + 2 * n.getAngle() - speed.getAngle());
             n.mul(2 * (n.x * rectSpeed.x + n.y * rectSpeed.y));
             speed.add(n);
-//            double collisionLoss = 0.05;
-//            speed.mul(1 - collisionLoss);
         }
     }
 }

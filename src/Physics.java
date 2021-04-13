@@ -19,6 +19,7 @@ public class Physics {
         r /= 2;
         pos.x += r;
         pos.y += r;
+
         if (is_equal(distance(pos, pos1), r + r1)) {
             Vector res = new Vector(pos.x - pos1.x, pos.y - pos1.y);
             double d = distance(res.getPoint(), new Point(0, 0));

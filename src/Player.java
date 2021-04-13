@@ -24,15 +24,6 @@ public class Player {
         return new Rectangle((int) (pos.x + headPos.x), (int) (pos.y + headPos.y), headR, headR);
     }
 
-//    public boolean isIn(Rectangle ball)
-//    {
-//        Vector ballCenter = new Vector(ball.x + ball.width / 2.0, ball.y + ball.height / 2.0);
-//        Point headCenter = new Point((int) (pos.x + headPos.x) + headR / 2, (int) (pos.y + headPos.y) + headR / 2);
-//        if (Physics.distance(ballCenter.getPoint(), headCenter) < headR / 2.0)
-//            return true;
-//        return ballCenter.isIn(getRect());
-//    }
-
     public void CollisionProcessing(Rectangle rect) {
         if (pos.x < rect.x || pos.x + size.x > rect.x + rect.width) {
             pos.x = prevPos.x;
