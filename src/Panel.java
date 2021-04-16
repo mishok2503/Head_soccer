@@ -7,6 +7,7 @@ public class Panel extends JPanel implements ActionListener {
     private final GameLogic gameLogic;
     private int counts = 0;
     private long lt;
+    private boolean isMenu = true;
 
     private final Image rightGoal = new ImageIcon("res/right_goal.png").getImage();
     private final Image leftGoal = new ImageIcon("res/left_goal.png").getImage();
@@ -17,11 +18,29 @@ public class Panel extends JPanel implements ActionListener {
     private final Image leftBody = new ImageIcon("res/left_body.png").getImage();
     private final Image rightBody = new ImageIcon("res/right_body.png").getImage();
     private final Image border = new ImageIcon("res/border.jpeg").getImage();
+    private final Image menuBg = new ImageIcon("res/menubg.jpg").getImage();
+
+    private final JButton resB, exitB;
 
     public Panel(GameLogic gameLogic, int fps) {
         this.gameLogic = gameLogic;
         addKeyListener(new KeyListener(gameLogic));
         setFocusable(true);
+        setLayout(null);
+        resB = new JButton("Play");
+        resB.setBounds(400, 300, 400, 150);
+        resB.setFocusable(false);
+        resB.setActionCommand("Restart");
+        resB.setFont(new Font(null, Font.BOLD, 40));
+        resB.addActionListener(this);
+        add(resB);
+        exitB = new JButton("Exit");
+        exitB.setBounds(400, 500, 400, 150);
+        exitB.setFocusable(false);
+        exitB.setFont(new Font(null, Font.BOLD, 40));
+        exitB.setActionCommand("Exit");
+        exitB.addActionListener(this);
+        add(exitB);
         Timer timer = new Timer(1000 / (fps * gameLogic.getCountsPerFrame()), this);
         timer.start();
         lt = System.nanoTime();
@@ -33,6 +52,12 @@ public class Panel extends JPanel implements ActionListener {
         this.setBackground(Color.BLACK);
 
         Graphics2D g = (Graphics2D) graphics;
+
+        if (isMenu)
+        {
+            g.drawImage(menuBg, 0, 0, null);
+            return;
+        }
 
         g.setFont(new Font(null, Font.BOLD, 100));
 
@@ -76,12 +101,35 @@ public class Panel extends JPanel implements ActionListener {
         g.drawImage(border, 0, 0, null);
     }
 
+    private boolean isMassege = true;
+
     @Override
     public void actionPerformed(ActionEvent e) {
         long ct = System.nanoTime();
-        gameLogic.update((ct - lt) / 1e7);
+        if (gameLogic.isRun())
+            gameLogic.update((ct - lt) / 1e7);
+        else {
+            repaint();
+            if (!isMassege) {
+                JOptionPane.showMessageDialog(this.getComponent(0), (gameLogic.isWinR() ? "Right" : "Left") + " player win!");
+                isMassege = true;
+            }
+            resB.setVisible(true);
+            exitB.setVisible(true);
+        }
         lt = ct;
         counts++;
+        if ("Restart".equals(e.getActionCommand())) {
+            gameLogic.restart();
+            isMenu = false;
+            resB.setText("Restart");
+            resB.setVisible(false);
+            exitB.setVisible(false);
+            isMassege = false;
+        }
+
+        if ("Exit".equals(e.getActionCommand()))
+            System.exit(0);
         if (counts == gameLogic.getCountsPerFrame()) {
             counts = 0;
             repaint();

@@ -6,7 +6,7 @@ public class GameLogic {
     private final Player[] players;
     private final Field field;
     private final int countsPerFrame;
-    private boolean wait = true;
+    private boolean wait = true, isRun = false, winR;
     private double waitTime = 150, curWaitTime = 0;
     private int lScore = 0, rScore = 0;
 
@@ -17,10 +17,20 @@ public class GameLogic {
         this.countsPerFrame = countsPerFrame;
     }
 
+    public void restart()
+    {
+        ballReset();
+        playersReset();
+        lScore = rScore = 0;
+        wait = isRun = true;
+    }
+
     public void ballReset()
     {
         ball.setPos(field.getBallStartPos());
         ball.setSpeed(new Vector(0, -3));
+        wait = true;
+        curWaitTime = 0;
     }
 
     public void playersReset()
@@ -83,18 +93,28 @@ public class GameLogic {
         if (!wait)
             ball.move(dt);
 
-        if (ball.getPos().x + ball.getRadius() < 10) {
-            rScore++;
-            ballReset();
-            playersReset();
-            wait = true;
+        if (ball.getPos().x + ball.getRadius() < 10 || ball.getPos().x > 1190) {
+            if (ball.getPos().x > 1190)
+                lScore++;
+            else
+                rScore++;
+            if (lScore > 2 || rScore > 2) {
+                isRun = false;
+                winR = rScore == 3;
+            }
+            else {
+                ballReset();
+                playersReset();
+            }
         }
-        if (ball.getPos().x > 1190) {
-            lScore++;
-            wait = true;
-            ballReset();
-            playersReset();
-        }
+    }
+
+    public boolean isRun() {
+        return isRun;
+    }
+
+    public boolean isWinR() {
+        return winR;
     }
 
     Point getScore() {
