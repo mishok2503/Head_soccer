@@ -19,6 +19,7 @@ public class Panel extends JPanel implements ActionListener {
     private final Image rightBody = new ImageIcon("res/right_body.png").getImage();
     private final Image border = new ImageIcon("res/border.jpeg").getImage();
     private final Image menuBg = new ImageIcon("res/menubg.jpg").getImage();
+    private final Image bg = new ImageIcon("res/bg.png").getImage();
 
     private final JButton resB, exitB;
 
@@ -68,7 +69,7 @@ public class Panel extends JPanel implements ActionListener {
         g.drawImage(rightGoal, 1140, 500, null);
         g.drawImage(leftGoal, -185, 500, null);
 
-        g.setColor(Color.white);
+        g.setColor(Color.black);
         Point score = gameLogic.getScore();
         g.drawString(score.x + ":" + score.y, 520 - (score.x > 9 ? 60 : 0), 200);
     }
@@ -90,6 +91,7 @@ public class Panel extends JPanel implements ActionListener {
     }
 
     private void drawField(Graphics2D g) {
+        g.drawImage(bg, 0, 0, null);
         for (int i=0; i < 24; ++i)
             g.drawImage(border, i * 50, 0, null);
         for (int i=1; i < 10; ++i)
